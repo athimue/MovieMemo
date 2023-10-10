@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_memo/src/domain/models/serie.dart';
 import 'package:movie_memo/src/domain/repositories/serie_repository.dart';
 
-part 'remote_series_state.dart';
+part 'popular_series_state.dart';
 
-class RemoteSeriesCubit extends Cubit<RemoteSeriesState> {
-  RemoteSeriesCubit({required this.serieRepository})
-      : super(RemoteSeriesInitial()) {
+class PopularSeriesCubit extends Cubit<PopularSeriesState> {
+  PopularSeriesCubit({required this.serieRepository})
+      : super(PopularSeriesInitial()) {
     getRemoteSeries();
   }
 
@@ -15,11 +15,11 @@ class RemoteSeriesCubit extends Cubit<RemoteSeriesState> {
 
   void getRemoteSeries() async {
     try {
-      emit(RemoteSeriesLoading());
+      emit(PopularSeriesLoading());
       final series = await serieRepository.getSeries();
-      emit(RemoteSeriesSuccess(series: series));
+      emit(PopularSeriesSuccess(series: series));
     } catch (e) {
-      emit(RemoteSeriesFailed());
+      emit(PopularSeriesFailed());
     }
   }
 }

@@ -52,5 +52,12 @@ class SerieDto {
 
   Map<String, dynamic> toJson() => _$SerieDtoToJson(this);
 
-  Serie parseSerieDto() => Serie(id: id, name: name, overview: overview);
+  Serie parseSerieDto() => Serie(
+      id: id,
+      name: name,
+      date: firstAirDate,
+      originalLanguage: originalLanguage,
+      originCountry: originCountry.isNotEmpty ? originCountry.first : "",
+      overview: overview,
+      picturePath: "https://image.tmdb.org/t/p/w92/$posterPath");
 }

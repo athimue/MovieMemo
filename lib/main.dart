@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_memo/src/domain/repositories/serie_repository.dart';
 import 'package:movie_memo/src/locator.dart';
-import 'package:movie_memo/src/presentation/cubits/remote_series/remote_series_cubit.dart';
+import 'package:movie_memo/src/presentation/cubits/popular_series/popular_series_cubit.dart';
 import 'package:movie_memo/src/presentation/views/home_view.dart';
 
 Future<void> main() async {
@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          BlocProvider<RemoteSeriesCubit>(
-            create: (context) => RemoteSeriesCubit(
+          BlocProvider<PopularSeriesCubit>(
+            create: (context) => PopularSeriesCubit(
               serieRepository: locator<SerieRepository>(),
             ),
           )

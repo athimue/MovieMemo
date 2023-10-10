@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:movie_memo/src/presentation/cubits/remote_series/remote_series_cubit.dart';
+import 'package:movie_memo/src/presentation/cubits/popular_series/popular_series_cubit.dart';
 
 class Serie extends HookWidget {
   Serie({super.key});
@@ -9,10 +9,14 @@ class Serie extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return (DefaultTabController(
-        length: 2,
+        length: 3,
         child: Scaffold(
             appBar: AppBar(
               bottom: const TabBar(tabs: [
+                Tab(
+                  icon: Icon(Icons.trending_up_outlined),
+                  text: "Popular",
+                ),
                 Tab(
                   icon: Icon(
                     Icons.done,
@@ -26,35 +30,47 @@ class Serie extends HookWidget {
               ]),
             ),
             body: TabBarView(
-              children: <Widget>[Icon(Icons.abc_rounded), SeriesToSee()],
+              children: <Widget>[
+                PopularSeries(),
+                Icon(Icons.abc_rounded),
+                Icon(Icons.remove_red_eye_sharp)
+              ],
             ))));
   }
 }
 
-class SeriesToSee extends HookWidget {
-  SeriesToSee({super.key});
+class PopularSeries extends HookWidget {
+  PopularSeries({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RemoteSeriesCubit, RemoteSeriesState>(
+    return BlocBuilder<PopularSeriesCubit, PopularSeriesState>(
       builder: (context, state) {
         switch (state.runtimeType) {
-          case RemoteSeriesLoading:
+          case PopularSeriesLoading:
             return const Center(child: Icon(Icons.baby_changing_station_sharp));
-          case RemoteSeriesFailed:
+          case PopularSeriesFailed:
             return const Center(child: Icon(Icons.refresh));
-          case RemoteSeriesSuccess:
+          case PopularSeriesSuccess:
             return state.series.isEmpty
-                ? Text("vide")
+                ? Center(child: Text("No popular series."))
                 : ListView.builder(
                     itemCount: state.series.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
-                        height: 100,
-                        color: Colors.amber,
-                        child: Center(
-                            child: Text('SERIE : ${state.series[index].name}')),
-                      );
+                          color: Colors.purple[200],
+                          padding: EdgeInsets.all(10),
+                          child: Row(children: [
+                            Image.network(state.series[index].picturePath),
+                            Column(children: [
+                              Row(children: [
+                                Text(state.series[index].name),
+                                Text(state.series[index].date)
+                              ]),
+                              Text(
+                                  '${state.series[index].originalLanguage}/${state.series[index].originCountry}'),
+                            ])
+                          ]));
                     });
           default:
             return const Center(child: Icon(Icons.access_alarm));
