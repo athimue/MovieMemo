@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_memo/pages/movie.dart';
-import 'package:movie_memo/pages/profil.dart';
-import 'package:movie_memo/pages/search.dart';
-import 'package:movie_memo/pages/serie.dart';
+import 'package:movie_memo/src/presentation/views/movie_view.dart';
+import 'package:movie_memo/src/presentation/views/profil_view.dart';
+import 'package:movie_memo/src/presentation/views/search_view.dart';
+import 'package:movie_memo/src/presentation/views/serie_view.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
     });
   }
 
-  final _pages = <Widget>[Movie(), Serie(), Search(), Profil()];
+  final _pages = <Widget>[Serie(), Movie(), Search(), Profil()];
 
   @override
   Widget build(BuildContext context) {

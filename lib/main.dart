@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:movie_memo/pages/home.dart';
-import 'package:movie_memo/pages/movie.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_memo/src/domain/repositories/serie_repository.dart';
+import 'package:movie_memo/src/locator.dart';
+import 'package:movie_memo/src/presentation/cubits/remote_series/remote_series_cubit.dart';
+import 'package:movie_memo/src/presentation/views/home_view.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setupLocator();
   runApp(const MyApp());
 }
 
@@ -12,13 +17,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Movie Memo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const Home(),
-    );
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<RemoteSeriesCubit>(
+            create: (context) => RemoteSeriesCubit(
+              serieRepository: locator<SerieRepository>(),
+            ),
+          )
+        ],
+        child: MaterialApp(
+          title: 'Movie Memo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          home: const Home(),
+        ));
   }
 }
