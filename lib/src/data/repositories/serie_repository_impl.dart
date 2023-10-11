@@ -13,15 +13,12 @@ class SerieRepositoryImpl implements SerieRepository {
       print("coucou");
       final httpResponse =
           await tdmbApiService.getSeries("9ee736e148e808222f04c1535dc80b64");
-      print("connard");
       if (httpResponse.results.isNotEmpty) {
-        print("connard");
         final response = httpResponse.results;
         final List<Serie> result =
             response.map((serieDto) => serieDto.parseSerieDto()).toList();
         return result;
       }
-      print("connard");
       return List.empty();
     } catch (e) {
       print("tamere");

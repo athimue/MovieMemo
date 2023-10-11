@@ -58,18 +58,26 @@ class PopularSeries extends HookWidget {
                     itemCount: state.series.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
-                          color: Colors.purple[200],
                           padding: EdgeInsets.all(10),
                           child: Row(children: [
-                            Image.network(state.series[index].picturePath),
-                            Column(children: [
-                              Row(children: [
-                                Text(state.series[index].name),
-                                Text(state.series[index].date)
-                              ]),
+                            ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.network(
+                                    state.series[index].picturePath)),
+                            Expanded(
+                                child: Column(children: [
                               Text(
-                                  '${state.series[index].originalLanguage}/${state.series[index].originCountry}'),
-                            ])
+                                state.series[index].name,
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                state.series[index].date,
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                  'Langue : ${state.series[index].originalLanguage} / Pays : ${state.series[index].originCountry}',
+                                  textAlign: TextAlign.center),
+                            ]))
                           ]));
                     });
           default:
