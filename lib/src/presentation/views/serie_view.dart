@@ -57,7 +57,8 @@ class PopularSeries extends HookWidget {
                 : ListView.builder(
                     itemCount: state.series.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return Container(
+                      return Column(children: [
+                        Padding(
                           padding: EdgeInsets.all(10),
                           child: Row(children: [
                             ClipRRect(
@@ -65,19 +66,36 @@ class PopularSeries extends HookWidget {
                                 child: Image.network(
                                     state.series[index].picturePath)),
                             Expanded(
-                                child: Column(children: [
-                              Text(
-                                state.series[index].name,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontWeight: FontWeight.bold),,
-                              ),
-                              Text(
-                                state.series[index].date,
-                              ),
-                              Text(
-                                  'Langue : ${state.series[index].originalLanguage} / Pays : ${state.series[index].originCountry}'),
-                            ]))
-                          ]));
+                                child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Column(children: [
+                                      Text(
+                                        state.series[index].name,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18.0,
+                                            color: Colors.pink),
+                                      ),
+                                      Text(
+                                        state.series[index].date,
+                                        style: TextStyle(color: Colors.pink),
+                                      ),
+                                      ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.network(
+                                              "https://flagsapi.com/${state.series[index].country}/flat/32.png")),
+                                      Text(
+                                          'Note : ${state.series[index].note.toString()} / 10',
+                                          style: TextStyle(color: Colors.pink)),
+                                    ]))),
+                            ElevatedButton(
+                                onPressed: () => {}, child: Icon(Icons.add))
+                          ]),
+                        ),
+                        Divider()
+                      ]);
                     });
           default:
             return const Center(child: Icon(Icons.access_alarm));

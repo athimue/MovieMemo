@@ -62,8 +62,8 @@ class SerieDto {
       id: id,
       name: name,
       date: firstAirDate,
-      originalLanguage: originalLanguage,
-      originCountry: originCountry.isNotEmpty ? originCountry.first : "",
+      country: originCountry.first,
+      note: voteAverage,
       overview: overview,
       picturePath: "https://image.tmdb.org/t/p/w92/$posterPath");
 }
