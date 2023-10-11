@@ -69,14 +69,13 @@ class PopularSeries extends HookWidget {
                               Text(
                                 state.series[index].name,
                                 textAlign: TextAlign.center,
+                                style: TextStyle(fontWeight: FontWeight.bold),,
                               ),
                               Text(
                                 state.series[index].date,
-                                textAlign: TextAlign.center,
                               ),
                               Text(
-                                  'Langue : ${state.series[index].originalLanguage} / Pays : ${state.series[index].originCountry}',
-                                  textAlign: TextAlign.center),
+                                  'Langue : ${state.series[index].originalLanguage} / Pays : ${state.series[index].originCountry}'),
                             ]))
                           ]));
                     });

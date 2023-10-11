@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:movie_memo/src/data/datasources/remote/api/tdmb_api_service.dart';
+import 'package:movie_memo/src/data/repositories/movie_repository_impl.dart';
 import 'package:movie_memo/src/data/repositories/serie_repository_impl.dart';
+import 'package:movie_memo/src/domain/repositories/movie_repository.dart';
 import 'package:movie_memo/src/domain/repositories/serie_repository.dart';
+import 'package:movie_memo/src/domain/usecases/get_popular_movies_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/get_popular_series_use_case.dart';
 
 final locator = GetIt.instance;
@@ -21,6 +24,14 @@ Future<void> setupLocator() async {
 
   locator.registerSingleton<GetPopularSeriesUseCase>(
     GetPopularSeriesUseCase(locator<SerieRepository>()),
+  );
+
+  locator.registerSingleton<MovieRepository>(
+    MovieRepositoryImpl(locator<TdmbApiService>()),
+  );
+
+  locator.registerSingleton<GetPopularMoviesUseCase>(
+    GetPopularMoviesUseCase(locator<MovieRepository>()),
   );
 
   //locator.registerSingleton<DatabaseRepository>(

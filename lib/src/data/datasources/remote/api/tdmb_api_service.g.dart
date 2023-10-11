@@ -34,7 +34,7 @@ class _TdmbApiService implements TdmbApiService {
     )
             .compose(
               _dio.options,
-              'discover/tv',
+              'trending/tv/week',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -44,6 +44,33 @@ class _TdmbApiService implements TdmbApiService {
               baseUrl,
             ))));
     final value = SerieResponseDto.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<MovieResponseDto> getPopularMovies(String apiKey) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'api_key': apiKey};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<MovieResponseDto>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'trending/movie/week',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = MovieResponseDto.fromJson(_result.data!);
     return value;
   }
 
