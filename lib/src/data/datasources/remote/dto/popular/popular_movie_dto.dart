@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:movie_memo/src/domain/models/movie.dart';
 
-part 'movie_dto.g.dart';
+part 'popular_movie_dto.g.dart';
 
 @JsonSerializable()
-class MovieDto {
+class PopularMovieDto {
   @JsonKey(name: "adult")
   final bool adult;
   @JsonKey(name: "backdrop_path")
@@ -36,7 +36,7 @@ class MovieDto {
   @JsonKey(name: "vote_count")
   final int voteCount;
 
-  const MovieDto(
+  const PopularMovieDto(
       this.adult,
       this.backdropPath,
       this.id,
@@ -53,12 +53,12 @@ class MovieDto {
       this.voteAverage,
       this.voteCount);
 
-  factory MovieDto.fromJson(Map<String, dynamic> json) =>
-      _$MovieDtoFromJson(json);
+  factory PopularMovieDto.fromJson(Map<String, dynamic> json) =>
+      _$PopularMovieDtoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MovieDtoToJson(this);
+  Map<String, dynamic> toJson() => _$PopularMovieDtoToJson(this);
 
-  Movie parseMovieDto() => Movie(
+  Movie parsePopularMovieDto() => Movie(
       id: id,
       name: title,
       date: releaseDate,

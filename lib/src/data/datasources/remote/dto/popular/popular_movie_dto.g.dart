@@ -1,45 +1,45 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'serie_dto.dart';
+part of 'popular_movie_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SerieDto _$SerieDtoFromJson(Map<String, dynamic> json) => SerieDto(
+PopularMovieDto _$PopularMovieDtoFromJson(Map<String, dynamic> json) =>
+    PopularMovieDto(
       json['adult'] as bool,
       json['backdrop_path'] as String,
-      json['first_air_date'] as String,
-      (json['genre_ids'] as List<dynamic>).map((e) => e as int).toList(),
       json['id'] as int,
-      json['name'] as String,
-      (json['origin_country'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
+      json['title'] as String,
       json['original_language'] as String,
-      json['original_name'] as String,
+      json['original_title'] as String,
       json['overview'] as String,
-      (json['popularity'] as num).toDouble(),
       json['poster_path'] as String,
       json['media_type'] as String,
+      (json['genre_ids'] as List<dynamic>).map((e) => e as int).toList(),
+      (json['popularity'] as num).toDouble(),
+      json['release_date'] as String,
+      json['video'] as bool,
       (json['vote_average'] as num).toDouble(),
       json['vote_count'] as int,
     );
 
-Map<String, dynamic> _$SerieDtoToJson(SerieDto instance) => <String, dynamic>{
+Map<String, dynamic> _$PopularMovieDtoToJson(PopularMovieDto instance) =>
+    <String, dynamic>{
       'adult': instance.adult,
       'backdrop_path': instance.backdropPath,
-      'first_air_date': instance.firstAirDate,
-      'genre_ids': instance.genreIds,
       'id': instance.id,
-      'name': instance.name,
-      'origin_country': instance.originCountry,
+      'title': instance.title,
       'original_language': instance.originalLanguage,
-      'original_name': instance.originalName,
+      'original_title': instance.originalTitle,
       'overview': instance.overview,
-      'popularity': instance.popularity,
       'poster_path': instance.posterPath,
       'media_type': instance.mediaType,
+      'genre_ids': instance.genreIds,
+      'popularity': instance.popularity,
+      'release_date': instance.releaseDate,
+      'video': instance.video,
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,
     };

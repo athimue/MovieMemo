@@ -14,8 +14,9 @@ class MovieRepositoryImpl implements MovieRepository {
           .getPopularMovies("9ee736e148e808222f04c1535dc80b64");
       if (httpResponse.results.isNotEmpty) {
         final response = httpResponse.results;
-        final List<Movie> result =
-            response.map((movieDto) => movieDto.parseMovieDto()).toList();
+        final List<Movie> result = response
+            .map((movieDto) => movieDto.parsePopularMovieDto())
+            .toList();
         return result;
       }
       return List.empty();

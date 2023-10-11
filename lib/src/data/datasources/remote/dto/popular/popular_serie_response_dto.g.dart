@@ -1,22 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'serie_response_dto.dart';
+part of 'popular_serie_response_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SerieResponseDto _$SerieResponseDtoFromJson(Map<String, dynamic> json) =>
-    SerieResponseDto(
+PopularSerieResponseDto _$PopularSerieResponseDtoFromJson(
+        Map<String, dynamic> json) =>
+    PopularSerieResponseDto(
       json['page'] as int,
       (json['results'] as List<dynamic>)
-          .map((e) => SerieDto.fromJson(e as Map<String, dynamic>))
+          .map((e) => PopularSerieDto.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['total_pages'] as int,
       json['total_results'] as int,
     );
 
-Map<String, dynamic> _$SerieResponseDtoToJson(SerieResponseDto instance) =>
+Map<String, dynamic> _$PopularSerieResponseDtoToJson(
+        PopularSerieResponseDto instance) =>
     <String, dynamic>{
       'page': instance.page,
       'results': instance.results,

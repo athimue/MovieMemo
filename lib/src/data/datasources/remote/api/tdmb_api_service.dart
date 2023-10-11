@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:movie_memo/src/data/datasources/remote/dto/movie_response_dto.dart';
-import 'package:movie_memo/src/data/datasources/remote/dto/serie_response_dto.dart';
+import 'package:movie_memo/src/data/datasources/remote/dto/popular/popular_movie_response_dto.dart';
+import 'package:movie_memo/src/data/datasources/remote/dto/popular/popular_serie_response_dto.dart';
+import 'package:movie_memo/src/data/datasources/remote/dto/serie/serie_dto.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'tdmb_api_service.g.dart';
@@ -10,8 +11,17 @@ abstract class TdmbApiService {
   factory TdmbApiService(Dio dio, {String baseUrl}) = _TdmbApiService;
 
   @GET('trending/tv/week')
-  Future<SerieResponseDto> getPopularSeries(@Query("api_key") String apiKey);
+  Future<PopularSerieResponseDto> getPopularSeries(
+      @Query("api_key") String apiKey);
 
   @GET('trending/movie/week')
-  Future<MovieResponseDto> getPopularMovies(@Query("api_key") String apiKey);
+  Future<PopularMovieResponseDto> getPopularMovies(
+      @Query("api_key") String apiKey);
+
+  @GET('tv/{id}')
+  Future<SerieDto> getSerie(@Query("api_key") String apiKey, @Path() String id);
+
+  @GET('movie/{id}')
+  Future<PopularMovieResponseDto> getMovie(
+      @Query("api_key") String apiKey, @Path() String id);
 }

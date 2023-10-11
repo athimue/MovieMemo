@@ -21,13 +21,13 @@ class _TdmbApiService implements TdmbApiService {
   String? baseUrl;
 
   @override
-  Future<SerieResponseDto> getPopularSeries(String apiKey) async {
+  Future<PopularSerieResponseDto> getPopularSeries(String apiKey) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'api_key': apiKey};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<SerieResponseDto>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PopularSerieResponseDto>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -43,18 +43,18 @@ class _TdmbApiService implements TdmbApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = SerieResponseDto.fromJson(_result.data!);
+    final value = PopularSerieResponseDto.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<MovieResponseDto> getPopularMovies(String apiKey) async {
+  Future<PopularMovieResponseDto> getPopularMovies(String apiKey) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'api_key': apiKey};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<MovieResponseDto>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PopularMovieResponseDto>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -70,7 +70,67 @@ class _TdmbApiService implements TdmbApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MovieResponseDto.fromJson(_result.data!);
+    final value = PopularMovieResponseDto.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SerieDto> getSerie(
+    String apiKey,
+    String id,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'api_key': apiKey};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<SerieDto>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'tv/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SerieDto.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<PopularMovieResponseDto> getMovie(
+    String apiKey,
+    String id,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'api_key': apiKey};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PopularMovieResponseDto>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'movie/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = PopularMovieResponseDto.fromJson(_result.data!);
     return value;
   }
 
