@@ -21,7 +21,7 @@ class _TdmbApiService implements TdmbApiService {
   String? baseUrl;
 
   @override
-  Future<SerieResponseDto> getSeries(String apiKey) async {
+  Future<SerieResponseDto> getPopularSeries(String apiKey) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'api_key': apiKey};
     final _headers = <String, dynamic>{};

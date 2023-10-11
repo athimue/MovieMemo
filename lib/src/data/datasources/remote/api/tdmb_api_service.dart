@@ -9,5 +9,5 @@ abstract class TdmbApiService {
   factory TdmbApiService(Dio dio, {String baseUrl}) = _TdmbApiService;
 
   @GET('discover/tv')
-  Future<SerieResponseDto> getSeries(@Query("api_key") String apiKey);
+  Future<SerieResponseDto> getPopularSeries(@Query("api_key") String apiKey);
 }

@@ -8,11 +8,10 @@ class SerieRepositoryImpl implements SerieRepository {
   SerieRepositoryImpl(this.tdmbApiService);
 
   @override
-  Future<List<Serie>> getSeries() async {
+  Future<List<Serie>> getPopularSeries() async {
     try {
-      print("coucou");
-      final httpResponse =
-          await tdmbApiService.getSeries("9ee736e148e808222f04c1535dc80b64");
+      final httpResponse = await tdmbApiService
+          .getPopularSeries("9ee736e148e808222f04c1535dc80b64");
       if (httpResponse.results.isNotEmpty) {
         final response = httpResponse.results;
         final List<Serie> result =
@@ -21,8 +20,6 @@ class SerieRepositoryImpl implements SerieRepository {
       }
       return List.empty();
     } catch (e) {
-      print("tamere");
-      print(e);
       throw Error();
     }
   }
