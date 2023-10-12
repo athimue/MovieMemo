@@ -3,15 +3,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:movie_memo/src/presentation/cubits/popular_movies/popular_movies_cubit.dart';
 
-class Movie extends StatelessWidget {
-  Movie({super.key});
+class Movie extends StatefulWidget {
+  const Movie({super.key});
 
+  @override
+  MovieState createState() => MovieState();
+}
+
+class MovieState extends State<Movie> {
   @override
   Widget build(BuildContext context) {
     return (DefaultTabController(
         length: 3,
         child: Scaffold(
             appBar: AppBar(
+              backgroundColor: Colors.purple[100],
+              toolbarHeight: 0,
               bottom: const TabBar(tabs: [
                 Tab(
                   icon: Icon(Icons.trending_up_outlined),

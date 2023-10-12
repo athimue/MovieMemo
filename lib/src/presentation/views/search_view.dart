@@ -18,7 +18,7 @@ class SearchState extends State<Search> {
     return (Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(20),
           child: TextField(
             onChanged: (value) {},
             decoration: InputDecoration(

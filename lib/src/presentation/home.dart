@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
                 label: "Search")
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.blue,
+          selectedItemColor: Colors.purple[100],
           onTap: _onItemTapped,
         ),
         body: _pages.elementAt(_selectedIndex));
