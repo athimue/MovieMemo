@@ -4,7 +4,7 @@ part 'production_dto.g.dart';
 
 @JsonSerializable()
 class ProductionDto {
-  @JsonKey(name: "iso_316_6_1")
+  @JsonKey(name: "iso_3166_1")
   String? iso31661;
 
   @JsonKey(name: "name")

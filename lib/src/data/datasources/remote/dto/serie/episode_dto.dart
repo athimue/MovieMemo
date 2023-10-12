@@ -11,7 +11,7 @@ class EpisodeDto {
   @JsonKey(name: "overview")
   String? overview;
   @JsonKey(name: "vote_average")
-  int? voteAverage;
+  double? voteAverage;
   @JsonKey(name: "vote_count")
   int? voteCount;
   @JsonKey(name: "air_date")

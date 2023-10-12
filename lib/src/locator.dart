@@ -8,6 +8,7 @@ import 'package:movie_memo/src/data/repositories/movie_repository_impl.dart';
 import 'package:movie_memo/src/data/repositories/serie_repository_impl.dart';
 import 'package:movie_memo/src/domain/repositories/movie_repository.dart';
 import 'package:movie_memo/src/domain/repositories/serie_repository.dart';
+import 'package:movie_memo/src/domain/usecases/add_watched_serie_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/get_Watched_series_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/get_popular_movies_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/get_popular_series_use_case.dart';
@@ -26,12 +27,12 @@ Future<void> setupLocator() async {
     SerieRepositoryImpl(locator<TdmbApiService>(), locator<SerieDao>()),
   );
 
-  locator.registerSingleton<GetPopularSeriesUseCase>(
-    GetPopularSeriesUseCase(locator<SerieRepository>()),
-  );
-
   locator.registerSingleton<MovieRepository>(
     MovieRepositoryImpl(locator<TdmbApiService>()),
+  );
+
+  locator.registerSingleton<GetPopularSeriesUseCase>(
+    GetPopularSeriesUseCase(locator<SerieRepository>()),
   );
 
   locator.registerSingleton<GetPopularMoviesUseCase>(
@@ -40,5 +41,9 @@ Future<void> setupLocator() async {
 
   locator.registerSingleton<GetWatchedSeriesUseCase>(
     GetWatchedSeriesUseCase(locator<SerieRepository>()),
+  );
+
+  locator.registerSingleton<AddWatchedSerieUseCase>(
+    AddWatchedSerieUseCase(locator<SerieRepository>()),
   );
 }

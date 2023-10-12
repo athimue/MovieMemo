@@ -8,12 +8,12 @@ part of 'production_dto.dart';
 
 ProductionDto _$ProductionDtoFromJson(Map<String, dynamic> json) =>
     ProductionDto(
-      iso31661: json['iso_316_6_1'],
+      iso31661: json['iso_3166_1'],
       name: json['name'],
     );
 
 Map<String, dynamic> _$ProductionDtoToJson(ProductionDto instance) =>
     <String, dynamic>{
-      'iso_316_6_1': instance.iso31661,
+      'iso_3166_1': instance.iso31661,
       'name': instance.name,
     };

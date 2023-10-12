@@ -17,7 +17,7 @@ class WatchedSeriesCubit extends Cubit<WatchedSeriesState> {
     try {
       emit(WatchedSeriesLoading());
       final series = await getWatchedSeriesUseCase.invoke();
-      print('oui');
+      print(series);
       emit(WatchedSeriesSuccess(series: series));
     } catch (e) {
       print(e);

@@ -6,4 +6,8 @@ abstract class SerieRepository {
   Future<List<Serie>> getUnwatchedSeries();
 
   Future<List<Serie>> getWatchedSeries();
+
+  Future<void> addWatchedSerie(int serieId);
+
+  Future<void> addUnwatchedSeriee(int serieId);
 }

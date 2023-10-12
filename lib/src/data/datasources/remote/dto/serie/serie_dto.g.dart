@@ -10,9 +10,9 @@ SerieDto _$SerieDtoFromJson(Map<String, dynamic> json) => SerieDto(
       adult: json['adult'] as bool?,
       backdropPath: json['backdrop_path'] as String?,
       createdBy: (json['created_by'] as List<dynamic>?)
-          ?.map((e) => SerieDto.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => AuthorDto.fromJson(e as Map<String, dynamic>))
           .toList(),
-      episodeRunTime: (json['episode_tun_time'] as List<dynamic>?)
+      episodeRunTime: (json['episode_run_time'] as List<dynamic>?)
           ?.map((e) => e as int)
           .toList(),
       firstAirDate: json['first_air_date'] as String,
@@ -43,8 +43,8 @@ SerieDto _$SerieDtoFromJson(Map<String, dynamic> json) => SerieDto(
       originCountry: (json['origin_country'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      originalLanguage: json['origin_language'] as String?,
-      originalName: json['origin_name'] as String?,
+      originalLanguage: json['original_language'] as String?,
+      originalName: json['original_name'] as String?,
       overview: json['overview'] as String,
       popularity: (json['popularity'] as num?)?.toDouble(),
       posterPath: json['poster_path'] as String?,
@@ -71,7 +71,7 @@ Map<String, dynamic> _$SerieDtoToJson(SerieDto instance) => <String, dynamic>{
       'adult': instance.adult,
       'backdrop_path': instance.backdropPath,
       'created_by': instance.createdBy,
-      'episode_tun_time': instance.episodeRunTime,
+      'episode_run_time': instance.episodeRunTime,
       'first_air_date': instance.firstAirDate,
       'genres': instance.genres,
       'homepage': instance.homepage,
@@ -86,8 +86,8 @@ Map<String, dynamic> _$SerieDtoToJson(SerieDto instance) => <String, dynamic>{
       'number_of_episodes': instance.numberOfEpisodes,
       'number_of_seasons': instance.numberOfSeasons,
       'origin_country': instance.originCountry,
-      'origin_language': instance.originalLanguage,
-      'origin_name': instance.originalName,
+      'original_language': instance.originalLanguage,
+      'original_name': instance.originalName,
       'overview': instance.overview,
       'popularity': instance.popularity,
       'poster_path': instance.posterPath,

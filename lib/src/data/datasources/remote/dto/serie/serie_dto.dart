@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:movie_memo/src/data/datasources/remote/dto/serie/author_dto.dart';
 import 'package:movie_memo/src/data/datasources/remote/dto/serie/episode_dto.dart';
 import 'package:movie_memo/src/data/datasources/remote/dto/serie/genre_dto.dart';
 import 'package:movie_memo/src/data/datasources/remote/dto/serie/language_dto.dart';
@@ -16,8 +17,8 @@ class SerieDto {
   @JsonKey(name: "backdrop_path")
   String? backdropPath;
   @JsonKey(name: "created_by")
-  List<SerieDto>? createdBy;
-  @JsonKey(name: "episode_tun_time")
+  List<AuthorDto>? createdBy;
+  @JsonKey(name: "episode_run_time")
   List<int>? episodeRunTime;
   @JsonKey(name: "first_air_date")
   String firstAirDate;
@@ -47,9 +48,9 @@ class SerieDto {
   int? numberOfSeasons;
   @JsonKey(name: "origin_country")
   List<String> originCountry;
-  @JsonKey(name: "origin_language")
+  @JsonKey(name: "original_language")
   String? originalLanguage;
-  @JsonKey(name: "origin_name")
+  @JsonKey(name: "original_name")
   String? originalName;
   @JsonKey(name: "overview")
   String overview;
