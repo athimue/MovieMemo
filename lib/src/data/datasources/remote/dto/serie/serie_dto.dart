@@ -17,7 +17,7 @@ class SerieDto {
   @JsonKey(name: "backdrop_path")
   String? backdropPath;
   @JsonKey(name: "created_by")
-  List<AuthorDto>? createdBy;
+  List<AuthorDto> createdBy;
   @JsonKey(name: "episode_run_time")
   List<int>? episodeRunTime;
   @JsonKey(name: "first_air_date")
@@ -41,11 +41,11 @@ class SerieDto {
   @JsonKey(name: "next_episode_to_air")
   EpisodeDto? nextEpisodeToAir;
   @JsonKey(name: "networks")
-  List<NetworkDto>? networks;
+  List<NetworkDto> networks;
   @JsonKey(name: "number_of_episodes")
-  int? numberOfEpisodes;
+  int numberOfEpisodes;
   @JsonKey(name: "number_of_seasons")
-  int? numberOfSeasons;
+  int numberOfSeasons;
   @JsonKey(name: "origin_country")
   List<String> originCountry;
   @JsonKey(name: "original_language")
@@ -80,7 +80,7 @@ class SerieDto {
   SerieDto(
       {this.adult,
       this.backdropPath,
-      this.createdBy,
+      required this.createdBy,
       this.episodeRunTime,
       required this.firstAirDate,
       this.genres,
@@ -92,9 +92,9 @@ class SerieDto {
       this.lastEpisodeToAir,
       required this.name,
       this.nextEpisodeToAir,
-      this.networks,
-      this.numberOfEpisodes,
-      this.numberOfSeasons,
+      required this.networks,
+      required this.numberOfEpisodes,
+      required this.numberOfSeasons,
       required this.originCountry,
       this.originalLanguage,
       this.originalName,
@@ -120,8 +120,11 @@ class SerieDto {
       id: id,
       name: name,
       date: firstAirDate,
+      author: createdBy.map((e) => e.name).toList(),
       country: originCountry.first,
+      networks: networks.map((e) => e.name).toList(),
+      numberOfEpisodes: numberOfEpisodes,
+      numberOfSeasons: numberOfSeasons,
       note: voteAverage,
-      overview: overview,
       picturePath: "https://image.tmdb.org/t/p/w92/$posterPath");
 }

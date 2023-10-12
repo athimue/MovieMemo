@@ -12,8 +12,11 @@ class Serie extends HookWidget {
     return (DefaultTabController(
         length: 3,
         child: Scaffold(
+            extendBodyBehindAppBar: true,
             appBar: AppBar(
-              bottom: const TabBar(tabs: [
+              backgroundColor: Colors.purple[100],
+              toolbarHeight: 0,
+              bottom: const TabBar(padding: EdgeInsets.all(0), tabs: [
                 Tab(
                   icon: Icon(Icons.trending_up_outlined),
                   text: "Popular",
@@ -25,7 +28,7 @@ class Serie extends HookWidget {
                   text: "Watched",
                 ),
                 Tab(
-                  icon: Icon(Icons.today_outlined),
+                  icon: Icon(Icons.watch_later),
                   text: "To See",
                 )
               ]),
@@ -34,7 +37,7 @@ class Serie extends HookWidget {
               children: <Widget>[
                 PopularSeries(),
                 WatchedSeries(),
-                Icon(Icons.remove_red_eye_sharp)
+                Icon(Icons.watch_later)
               ],
             ))));
   }
@@ -54,64 +57,74 @@ class PopularSeries extends HookWidget {
           case PopularSeriesFailed:
             return const Center(child: Icon(Icons.refresh));
           case PopularSeriesSuccess:
-            return state.series.isEmpty
+            return state.popularSeries.isEmpty
                 ? Center(child: Text("No popular series."))
                 : Column(children: [
                     Expanded(
                         child: ListView.builder(
-                            itemCount: state.series.length,
+                            itemCount: state.popularSeries.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return Container(
-                                  color: Colors.pink[100],
-                                  child: Column(children: [
-                                    Padding(
-                                      padding: EdgeInsets.all(10),
-                                      child: Row(children: [
-                                        ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: Image.network(state
-                                                .series[index].picturePath)),
-                                        Expanded(
-                                            child: Padding(
-                                                padding: EdgeInsets.all(10),
-                                                child: Column(children: [
-                                                  Text(
-                                                    state.series[index].name,
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 18.0,
-                                                        color: Colors.pink),
-                                                  ),
-                                                  Text(
-                                                    state.series[index].date,
-                                                    style: TextStyle(
-                                                        color: Colors.pink),
-                                                  ),
-                                                  ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                      child: Image.network(
-                                                          "https://flagsapi.com/${state.series[index].country}/flat/32.png")),
-                                                  Text(
-                                                      'Note : ${state.series[index].note.toString()} / 10',
-                                                      style: TextStyle(
-                                                          color: Colors.pink)),
-                                                ]))),
+                              return Column(children: [
+                                Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Row(children: [
+                                    ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        child: Image.network(state
+                                            .popularSeries[index].picturePath)),
+                                    Expanded(
+                                        child: Padding(
+                                            padding: EdgeInsets.all(10),
+                                            child: Column(children: [
+                                              Text(
+                                                state.popularSeries[index].name,
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18.0,
+                                                    color: Colors.pink),
+                                              ),
+                                              Text(
+                                                state.popularSeries[index].date,
+                                                style: TextStyle(
+                                                    color: Colors.pink),
+                                              ),
+                                              ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.network(
+                                                      "https://flagsapi.com/${state.popularSeries[index].country}/flat/32.png")),
+                                              Text(
+                                                  'Note : ${state.popularSeries[index].note.toString()} / 10',
+                                                  style: TextStyle(
+                                                      color: Colors.pink)),
+                                            ]))),
+                                    Column(
+                                      children: [
                                         ElevatedButton(
                                             onPressed: () => {
                                                   popularSeriesCubit
                                                       .addWatchedSerie(state
-                                                          .series[index].id)
+                                                          .popularSeries[index]
+                                                          .id)
                                                 },
-                                            child: Icon(Icons.add))
-                                      ]),
-                                    ),
-                                    Divider(color: Colors.pink)
-                                  ]));
+                                            child: Icon(Icons.done)),
+                                        ElevatedButton(
+                                            onPressed: () => {
+                                                  popularSeriesCubit
+                                                      .addWatchedSerie(state
+                                                          .popularSeries[index]
+                                                          .id)
+                                                },
+                                            child: Icon(Icons.watch_later))
+                                      ],
+                                    )
+                                  ]),
+                                ),
+                                Divider(color: Colors.pink)
+                              ]);
                             }))
                   ]);
           default:
@@ -127,6 +140,7 @@ class WatchedSeries extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final watchedSeriesCubit = BlocProvider.of<WatchedSeriesCubit>(context);
     return BlocBuilder<WatchedSeriesCubit, WatchedSeriesState>(
       builder: (context, state) {
         switch (state.runtimeType) {
@@ -161,18 +175,23 @@ class WatchedSeries extends HookWidget {
                                             color: Colors.pink),
                                       ),
                                       Text(
-                                        state.series[index].date,
+                                        "S${state.series[index].numberOfSeasons} - E${state.series[index].numberOfEpisodes}",
                                         style: TextStyle(color: Colors.pink),
                                       ),
-                                      ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.network(
-                                              "https://flagsapi.com/${state.series[index].country}/flat/32.png")),
+                                      Text(
+                                        "Platform : ${state.series[index].networks.first}",
+                                        style: TextStyle(color: Colors.pink),
+                                      ),
                                       Text(
                                           'Note : ${state.series[index].note.toString()} / 10',
                                           style: TextStyle(color: Colors.pink)),
-                                    ])))
+                                    ]))),
+                            ElevatedButton(
+                                onPressed: () => {
+                                      watchedSeriesCubit.deleteWatchedSerie(
+                                          state.series[index].id)
+                                    },
+                                child: Icon(Icons.delete))
                           ]),
                         ),
                         Divider()

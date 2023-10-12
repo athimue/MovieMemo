@@ -7,15 +7,20 @@ class AuthorDto {
   @JsonKey(name: "id")
   int? id;
   @JsonKey(name: "credit_id")
-  String? creditId;
+  String creditId;
   @JsonKey(name: "name")
-  String? name;
+  String name;
   @JsonKey(name: "gender")
   int? gender;
   @JsonKey(name: "profile_path")
   String? profilePath;
 
-  AuthorDto({this.id, this.creditId, this.name, this.gender, this.profilePath});
+  AuthorDto(
+      {this.id,
+      required this.creditId,
+      required this.name,
+      this.gender,
+      this.profilePath});
 
   factory AuthorDto.fromJson(Map<String, dynamic> json) =>
       _$AuthorDtoFromJson(json);

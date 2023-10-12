@@ -14,5 +14,5 @@ abstract class SerieDao {
   Future<List<SerieEntity>> getWatchedSeries();
 
   @delete
-  Future<void> deleteSerie(SerieEntity serieEntity);
+  Future<void> deleteWatchedSerie(SerieEntity serieEntity);
 }

@@ -8,8 +8,8 @@ part of 'author_dto.dart';
 
 AuthorDto _$AuthorDtoFromJson(Map<String, dynamic> json) => AuthorDto(
       id: json['id'] as int?,
-      creditId: json['credit_id'] as String?,
-      name: json['name'] as String?,
+      creditId: json['credit_id'] as String,
+      name: json['name'] as String,
       gender: json['gender'] as int?,
       profilePath: json['profile_path'] as String?,
     );

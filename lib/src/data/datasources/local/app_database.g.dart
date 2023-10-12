@@ -151,7 +151,7 @@ class _$SerieDao extends SerieDao {
   }
 
   @override
-  Future<void> deleteSerie(SerieEntity serieEntity) async {
+  Future<void> deleteWatchedSerie(SerieEntity serieEntity) async {
     await _serieEntityDeletionAdapter.delete(serieEntity);
   }
 }

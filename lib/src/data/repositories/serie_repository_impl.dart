@@ -1,6 +1,7 @@
 import 'package:movie_memo/src/data/datasources/local/dao/serie_dao.dart';
 import 'package:movie_memo/src/data/datasources/local/entity/serie_entity.dart';
 import 'package:movie_memo/src/data/datasources/remote/api/tdmb_api_service.dart';
+import 'package:movie_memo/src/domain/models/popular_serie.dart';
 import 'package:movie_memo/src/domain/models/serie.dart';
 import 'package:movie_memo/src/domain/repositories/serie_repository.dart';
 
@@ -11,12 +12,12 @@ class SerieRepositoryImpl implements SerieRepository {
   SerieRepositoryImpl(this.tdmbApiService, this.serieDao);
 
   @override
-  Future<List<Serie>> getPopularSeries() async {
+  Future<List<PopularSerie>> getPopularSeries() async {
     try {
       final response = await tdmbApiService
           .getPopularSeries("9ee736e148e808222f04c1535dc80b64");
       if (response.results.isNotEmpty) {
-        final List<Serie> result = response.results
+        final List<PopularSerie> result = response.results
             .map((serieDto) => serieDto.parsePopularSerieDto())
             .toList();
         return result;
@@ -64,5 +65,11 @@ class SerieRepositoryImpl implements SerieRepository {
   @override
   Future<void> addWatchedSerie(int serieId) {
     return serieDao.insertSerie(SerieEntity(id: serieId, isWatched: true));
+  }
+
+  @override
+  Future<void> deleteWatchedSerie(int serieId) {
+    return serieDao
+        .deleteWatchedSerie(SerieEntity(id: serieId, isWatched: true));
   }
 }

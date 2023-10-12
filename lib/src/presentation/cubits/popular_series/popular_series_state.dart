@@ -1,16 +1,16 @@
 part of 'popular_series_cubit.dart';
 
 abstract class PopularSeriesState extends Equatable {
-  final List<Serie> series;
+  final List<PopularSerie> popularSeries;
   final Error? error;
 
   const PopularSeriesState({
-    this.series = const [],
+    this.popularSeries = const [],
     this.error,
   });
 
   @override
-  List<Object?> get props => [series, error];
+  List<Object?> get props => [popularSeries, error];
 }
 
 class PopularSeriesInitial extends PopularSeriesState {
@@ -22,7 +22,7 @@ class PopularSeriesLoading extends PopularSeriesState {
 }
 
 class PopularSeriesSuccess extends PopularSeriesState {
-  const PopularSeriesSuccess({super.series});
+  const PopularSeriesSuccess({super.popularSeries});
 }
 
 class PopularSeriesFailed extends PopularSeriesState {

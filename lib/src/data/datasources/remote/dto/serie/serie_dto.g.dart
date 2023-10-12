@@ -9,8 +9,8 @@ part of 'serie_dto.dart';
 SerieDto _$SerieDtoFromJson(Map<String, dynamic> json) => SerieDto(
       adult: json['adult'] as bool?,
       backdropPath: json['backdrop_path'] as String?,
-      createdBy: (json['created_by'] as List<dynamic>?)
-          ?.map((e) => AuthorDto.fromJson(e as Map<String, dynamic>))
+      createdBy: (json['created_by'] as List<dynamic>)
+          .map((e) => AuthorDto.fromJson(e as Map<String, dynamic>))
           .toList(),
       episodeRunTime: (json['episode_run_time'] as List<dynamic>?)
           ?.map((e) => e as int)
@@ -35,11 +35,11 @@ SerieDto _$SerieDtoFromJson(Map<String, dynamic> json) => SerieDto(
           ? null
           : EpisodeDto.fromJson(
               json['next_episode_to_air'] as Map<String, dynamic>),
-      networks: (json['networks'] as List<dynamic>?)
-          ?.map((e) => NetworkDto.fromJson(e as Map<String, dynamic>))
+      networks: (json['networks'] as List<dynamic>)
+          .map((e) => NetworkDto.fromJson(e as Map<String, dynamic>))
           .toList(),
-      numberOfEpisodes: json['number_of_episodes'] as int?,
-      numberOfSeasons: json['number_of_seasons'] as int?,
+      numberOfEpisodes: json['number_of_episodes'] as int,
+      numberOfSeasons: json['number_of_seasons'] as int,
       originCountry: (json['origin_country'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),

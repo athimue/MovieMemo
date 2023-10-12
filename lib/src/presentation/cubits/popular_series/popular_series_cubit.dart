@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_memo/src/domain/models/serie.dart';
+import 'package:movie_memo/src/domain/models/popular_serie.dart';
 import 'package:movie_memo/src/domain/usecases/add_watched_serie_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/get_popular_series_use_case.dart';
 
@@ -20,8 +20,8 @@ class PopularSeriesCubit extends Cubit<PopularSeriesState> {
   void getRemoteSeries() async {
     try {
       emit(PopularSeriesLoading());
-      emit(
-          PopularSeriesSuccess(series: await getPopularSeriesUseCase.invoke()));
+      emit(PopularSeriesSuccess(
+          popularSeries: await getPopularSeriesUseCase.invoke()));
     } catch (e) {
       emit(PopularSeriesFailed());
     }

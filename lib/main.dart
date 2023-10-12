@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_memo/src/domain/usecases/add_watched_serie_use_case.dart';
+import 'package:movie_memo/src/domain/usecases/delete_watched_serie_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/get_Watched_series_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/get_popular_movies_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/get_popular_series_use_case.dart';
@@ -36,8 +37,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<WatchedSeriesCubit>(
             create: (context) => WatchedSeriesCubit(
-              getWatchedSeriesUseCase: locator<GetWatchedSeriesUseCase>(),
-            ),
+                getWatchedSeriesUseCase: locator<GetWatchedSeriesUseCase>(),
+                deleteWatchedSerieUseCase:
+                    locator<DeleteWatchedSerieUseCase>()),
           )
         ],
         child: MaterialApp(
