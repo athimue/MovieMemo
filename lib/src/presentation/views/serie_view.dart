@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:movie_memo/src/presentation/widgets/popular_series.dart';
 import 'package:movie_memo/src/presentation/widgets/unwatched_series.dart';
 import 'package:movie_memo/src/presentation/widgets/watched_series.dart';
 
-class Serie extends HookWidget {
-  Serie({super.key});
+class Serie extends StatefulWidget {
+  const Serie({super.key});
 
+  @override
+  SerieState createState() => SerieState();
+}
+
+class SerieState extends State<Serie> {
   @override
   Widget build(BuildContext context) {
     return (DefaultTabController(
