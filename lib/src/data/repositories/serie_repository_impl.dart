@@ -29,32 +29,27 @@ class SerieRepositoryImpl implements SerieRepository {
   }
 
   @override
-  Future<List<Serie>> getUnwatchedSeries() async {
-    final unwatchedSerieEntities = await serieDao.getUnwatchedSeries();
-    var unwatchedSeries = <Serie>[];
-    unwatchedSerieEntities.forEach((element) async {
-      unwatchedSeries.add((await tdmbApiService.getSerie(
-              "9ee736e148e808222f04c1535dc80b64", element.id.toString()))
+  Future<List<Serie>> getWatchedSeries() async {
+    final watchedSerieEntities = await serieDao.getWatchedSeries();
+    var watchedSeries = <Serie>[];
+    for (SerieEntity serieEntity in watchedSerieEntities) {
+      watchedSeries.add((await tdmbApiService.getSerie(
+              "9ee736e148e808222f04c1535dc80b64", serieEntity.id.toString()))
           .parseSerieDto());
-    });
-    return unwatchedSeries;
+    }
+    return watchedSeries;
   }
 
   @override
-  Future<List<Serie>> getWatchedSeries() async {
-    try {
-      final watchedSerieEntities = await serieDao.getWatchedSeries();
-      var watchedSeries = <Serie>[];
-      for (SerieEntity serieEntity in watchedSerieEntities) {
-        watchedSeries.add((await tdmbApiService.getSerie(
-                "9ee736e148e808222f04c1535dc80b64", serieEntity.id.toString()))
-            .parseSerieDto());
-      }
-      return watchedSeries;
-    } catch (e) {
-      print(e);
-      throw Error();
+  Future<List<Serie>> getUnwatchedSeries() async {
+    final unwatchedSerieEntities = await serieDao.getUnwatchedSeries();
+    var unwatchedSeries = <Serie>[];
+    for (SerieEntity serieEntity in unwatchedSerieEntities) {
+      unwatchedSeries.add((await tdmbApiService.getSerie(
+              "9ee736e148e808222f04c1535dc80b64", serieEntity.id.toString()))
+          .parseSerieDto());
     }
+    return unwatchedSeries;
   }
 
   @override
@@ -71,5 +66,16 @@ class SerieRepositoryImpl implements SerieRepository {
   Future<void> deleteWatchedSerie(int serieId) {
     return serieDao
         .deleteWatchedSerie(SerieEntity(id: serieId, isWatched: true));
+  }
+
+  @override
+  Future<void> deleteUnwatchedSerie(int serieId) {
+    return serieDao
+        .deleteWatchedSerie(SerieEntity(id: serieId, isWatched: true));
+  }
+
+  @override
+  Future<void> watchSerie(int serieId) {
+    return serieDao.watchSerie(SerieEntity(id: serieId, isWatched: true));
   }
 }

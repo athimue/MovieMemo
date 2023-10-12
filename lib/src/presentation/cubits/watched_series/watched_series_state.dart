@@ -1,16 +1,16 @@
 part of 'watched_series_cubit.dart';
 
 abstract class WatchedSeriesState extends Equatable {
-  final List<Serie> series;
+  final List<Serie> watchSeries;
   final Error? error;
 
   const WatchedSeriesState({
-    this.series = const [],
+    this.watchSeries = const [],
     this.error,
   });
 
   @override
-  List<Object?> get props => [series, error];
+  List<Object?> get props => [watchSeries, error];
 }
 
 class WatchedSeriesInitial extends WatchedSeriesState {
@@ -22,7 +22,7 @@ class WatchedSeriesLoading extends WatchedSeriesState {
 }
 
 class WatchedSeriesSuccess extends WatchedSeriesState {
-  const WatchedSeriesSuccess({super.series});
+  const WatchedSeriesSuccess({super.watchSeries});
 }
 
 class WatchedSeriesFailed extends WatchedSeriesState {

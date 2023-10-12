@@ -8,11 +8,15 @@ import 'package:movie_memo/src/data/repositories/movie_repository_impl.dart';
 import 'package:movie_memo/src/data/repositories/serie_repository_impl.dart';
 import 'package:movie_memo/src/domain/repositories/movie_repository.dart';
 import 'package:movie_memo/src/domain/repositories/serie_repository.dart';
+import 'package:movie_memo/src/domain/usecases/add_unwatched_serie_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/add_watched_serie_use_case.dart';
+import 'package:movie_memo/src/domain/usecases/delete_unwatched_serie_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/delete_watched_serie_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/get_Watched_series_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/get_popular_movies_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/get_popular_series_use_case.dart';
+import 'package:movie_memo/src/domain/usecases/get_unwatched_series_use_case.dart';
+import 'package:movie_memo/src/domain/usecases/watch_serie_use_case.dart';
 
 final locator = GetIt.instance;
 
@@ -50,5 +54,21 @@ Future<void> setupLocator() async {
 
   locator.registerSingleton<DeleteWatchedSerieUseCase>(
     DeleteWatchedSerieUseCase(locator<SerieRepository>()),
+  );
+
+  locator.registerSingleton<GetUnwatchedSeriesUseCase>(
+    GetUnwatchedSeriesUseCase(locator<SerieRepository>()),
+  );
+
+  locator.registerSingleton<AddUnwatchedSerieUseCase>(
+    AddUnwatchedSerieUseCase(locator<SerieRepository>()),
+  );
+
+  locator.registerSingleton<DeleteUnwatchedSerieUseCase>(
+    DeleteUnwatchedSerieUseCase(locator<SerieRepository>()),
+  );
+
+  locator.registerSingleton<WatchSerieUseCase>(
+    WatchSerieUseCase(locator<SerieRepository>()),
   );
 }

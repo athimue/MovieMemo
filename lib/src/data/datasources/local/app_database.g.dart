@@ -111,6 +111,14 @@ class _$SerieDao extends SerieDao {
                   'id': item.id,
                   'isWatched': item.isWatched ? 1 : 0
                 }),
+        _serieEntityUpdateAdapter = UpdateAdapter(
+            database,
+            'series_table',
+            ['id'],
+            (SerieEntity item) => <String, Object?>{
+                  'id': item.id,
+                  'isWatched': item.isWatched ? 1 : 0
+                }),
         _serieEntityDeletionAdapter = DeletionAdapter(
             database,
             'series_table',
@@ -128,18 +136,22 @@ class _$SerieDao extends SerieDao {
 
   final InsertionAdapter<SerieEntity> _serieEntityInsertionAdapter;
 
+  final UpdateAdapter<SerieEntity> _serieEntityUpdateAdapter;
+
   final DeletionAdapter<SerieEntity> _serieEntityDeletionAdapter;
 
   @override
   Future<List<SerieEntity>> getUnwatchedSeries() async {
-    return _queryAdapter.queryList('SELECT * FROM series_table',
+    return _queryAdapter.queryList(
+        'SELECT * FROM series_table WHERE isWatched = \'0\'',
         mapper: (Map<String, Object?> row) => SerieEntity(
             id: row['id'] as int, isWatched: (row['isWatched'] as int) != 0));
   }
 
   @override
   Future<List<SerieEntity>> getWatchedSeries() async {
-    return _queryAdapter.queryList('SELECT * FROM series_table',
+    return _queryAdapter.queryList(
+        'SELECT * FROM series_table WHERE isWatched = \'1\'',
         mapper: (Map<String, Object?> row) => SerieEntity(
             id: row['id'] as int, isWatched: (row['isWatched'] as int) != 0));
   }
@@ -151,7 +163,18 @@ class _$SerieDao extends SerieDao {
   }
 
   @override
+  Future<void> watchSerie(SerieEntity serieEntity) async {
+    await _serieEntityUpdateAdapter.update(
+        serieEntity, OnConflictStrategy.abort);
+  }
+
+  @override
   Future<void> deleteWatchedSerie(SerieEntity serieEntity) async {
+    await _serieEntityDeletionAdapter.delete(serieEntity);
+  }
+
+  @override
+  Future<void> deleteUnWatchedSerie(SerieEntity serieEntity) async {
     await _serieEntityDeletionAdapter.delete(serieEntity);
   }
 }

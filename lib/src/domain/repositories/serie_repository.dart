@@ -13,4 +13,8 @@ abstract class SerieRepository {
   Future<void> deleteWatchedSerie(int serieId);
 
   Future<void> addUnwatchedSeriee(int serieId);
+
+  Future<void> deleteUnwatchedSerie(int serieId);
+
+  Future<void> watchSerie(int serieId);
 }
