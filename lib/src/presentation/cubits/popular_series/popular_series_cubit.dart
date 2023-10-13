@@ -13,14 +13,14 @@ class PopularSeriesCubit extends Cubit<PopularSeriesState> {
       required this.addWatchedSerieUseCase,
       required this.addUnwatchedSerieUseCase})
       : super(PopularSeriesInitial()) {
-    getRemoteSeries();
+    getPopularSeries();
   }
 
   final GetPopularSeriesUseCase getPopularSeriesUseCase;
   final AddWatchedSerieUseCase addWatchedSerieUseCase;
   final AddUnwatchedSerieUseCase addUnwatchedSerieUseCase;
 
-  void getRemoteSeries() async {
+  void getPopularSeries() async {
     try {
       emit(PopularSeriesLoading());
       emit(PopularSeriesSuccess(

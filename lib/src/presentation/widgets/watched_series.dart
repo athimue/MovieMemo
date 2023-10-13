@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:movie_memo/src/presentation/cubits/watched_series/watched_series_cubit.dart';
 
-class WatchedSeries extends HookWidget {
-  WatchedSeries({super.key});
+class WatchedSeries extends StatefulWidget {
+  const WatchedSeries({Key? key}) : super(key: key);
+
+  @override
+  State<WatchedSeries> createState() => WatchedSeriesWidgetState();
+}
+
+class WatchedSeriesWidgetState extends State<WatchedSeries> {
+  late WatchedSeriesCubit watchedSeriesCubit;
+
+  @override
+  void initState() {
+    watchedSeriesCubit = BlocProvider.of<WatchedSeriesCubit>(context);
+    watchedSeriesCubit.getWatchedSeries();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final watchedSeriesCubit = BlocProvider.of<WatchedSeriesCubit>(context);
     return BlocBuilder<WatchedSeriesCubit, WatchedSeriesState>(
       builder: (context, state) {
         switch (state.runtimeType) {
