@@ -22,7 +22,7 @@ class SearchResultDto {
   @JsonKey(name: "poster_path")
   final String? posterPath;
   @JsonKey(name: "media_type")
-  final String? mediaType;
+  final String mediaType;
   @JsonKey(name: "genre_ids")
   final List<int>? genreIds;
   @JsonKey(name: "popularity")
@@ -79,5 +79,6 @@ class SearchResultDto {
       overview: overview,
       picturePath: posterPath != null
           ? "https://image.tmdb.org/t/p/w92/$posterPath"
-          : "");
+          : "",
+      mediaType: mediaType);
 }

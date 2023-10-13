@@ -66,19 +66,24 @@ class SearchResultState extends State<SearchResult> {
                                 Text(
                                   state.searchResults[index].name,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0,
+                                      color: Colors.blue),
                                 ),
                                 Text(
                                   state.searchResults[index].date,
-                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.blue),
                                 ),
                                 Text(
-                                    state.searchResults[index].originalLanguage,
-                                    textAlign: TextAlign.center),
+                                  state.searchResults[index].originalLanguage
+                                      .toUpperCase(),
+                                  style: TextStyle(color: Colors.blue),
+                                ),
                                 Text(
-                                    state.searchResults[index].popularity
-                                        .toString(),
-                                    textAlign: TextAlign.center),
+                                  state.searchResults[index].mediaType,
+                                  style: TextStyle(color: Colors.blue),
+                                ),
                               ]))
                             ]));
                       });

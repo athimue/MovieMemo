@@ -6,6 +6,7 @@ class SearchResult {
   final double popularity;
   final String overview;
   final String picturePath;
+  final String mediaType;
   SearchResult(
       {required this.id,
       required this.name,
@@ -13,5 +14,6 @@ class SearchResult {
       required this.originalLanguage,
       required this.popularity,
       required this.overview,
-      required this.picturePath});
+      required this.picturePath,
+      required this.mediaType});
 }

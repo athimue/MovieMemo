@@ -16,7 +16,7 @@ SearchResultDto _$SearchResultDtoFromJson(Map<String, dynamic> json) =>
       json['original_title'] as String?,
       json['overview'] as String,
       json['poster_path'] as String?,
-      json['media_type'] as String?,
+      json['media_type'] as String,
       (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int).toList(),
       (json['popularity'] as num).toDouble(),
       json['release_date'] as String?,
