@@ -7,11 +7,13 @@ import 'package:movie_memo/src/domain/usecases/delete_watched_serie_use_case.dar
 import 'package:movie_memo/src/domain/usecases/get_Watched_series_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/get_popular_movies_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/get_popular_series_use_case.dart';
+import 'package:movie_memo/src/domain/usecases/get_search_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/get_unwatched_series_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/watch_serie_use_case.dart';
 import 'package:movie_memo/src/locator.dart';
 import 'package:movie_memo/src/presentation/cubits/popular_movies/popular_movies_cubit.dart';
 import 'package:movie_memo/src/presentation/cubits/popular_series/popular_series_cubit.dart';
+import 'package:movie_memo/src/presentation/cubits/search/search_cubit.dart';
 import 'package:movie_memo/src/presentation/cubits/unwatched_series/unwatched_series_cubit.dart';
 import 'package:movie_memo/src/presentation/cubits/watched_series/watched_series_cubit.dart';
 import 'package:movie_memo/src/presentation/views/home_view.dart';
@@ -53,7 +55,11 @@ class MyApp extends StatelessWidget {
                 deleteUnwatchedSerieUseCase:
                     locator<DeleteUnwatchedSerieUseCase>(),
                 watchSerieUseCase: locator<WatchSerieUseCase>()),
-          )
+          ),
+          BlocProvider<SearchCubit>(
+            create: (context) =>
+                SearchCubit(getSearchUseCase: locator<GetSearchUseCase>()),
+          ),
         ],
         child: MaterialApp(
           title: 'Movie Memo',

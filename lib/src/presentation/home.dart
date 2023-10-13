@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
     });
   }
 
-  final _pages = <Widget>[Serie(), Movie(), Search(), Profil()];
+  final _pages = <Widget>[Serie(), Movie(), SearchResult(), Profil()];
 
   @override
   Widget build(BuildContext context) {

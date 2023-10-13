@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:movie_memo/src/data/datasources/remote/dto/popular/popular_movie_response_dto.dart';
 import 'package:movie_memo/src/data/datasources/remote/dto/popular/popular_serie_response_dto.dart';
+import 'package:movie_memo/src/data/datasources/remote/dto/search/search_result_response_dto.dart';
 import 'package:movie_memo/src/data/datasources/remote/dto/serie/serie_dto.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -24,4 +25,8 @@ abstract class TdmbApiService {
   @GET('movie/{id}')
   Future<PopularMovieResponseDto> getMovie(
       @Query("api_key") String apiKey, @Path() String id);
+
+  @GET('search/multi')
+  Future<SearchResultResponseDto> getSearchResult(
+      @Query("api_key") String apiKey, @Query("query") String query);
 }

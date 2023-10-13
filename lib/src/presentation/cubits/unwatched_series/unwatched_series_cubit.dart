@@ -24,7 +24,6 @@ class UnwatchedSeriesCubit extends Cubit<UnwatchedSeriesState> {
     try {
       emit(UnwatchedSeriesLoading());
       final unwatchedSeries = await getUnwatchedSeriesUseCase.invoke();
-      print(unwatchedSeries);
       emit(UnwatchedSeriesSuccess(unwatchedSeries: unwatchedSeries));
     } catch (e) {
       print(e);

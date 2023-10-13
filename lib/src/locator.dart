@@ -5,8 +5,10 @@ import 'package:movie_memo/src/data/datasources/local/dao/serie_dao.dart';
 import 'package:movie_memo/src/data/datasources/local/database_constants.dart';
 import 'package:movie_memo/src/data/datasources/remote/api/tdmb_api_service.dart';
 import 'package:movie_memo/src/data/repositories/movie_repository_impl.dart';
+import 'package:movie_memo/src/data/repositories/search_repository_impl.dart';
 import 'package:movie_memo/src/data/repositories/serie_repository_impl.dart';
 import 'package:movie_memo/src/domain/repositories/movie_repository.dart';
+import 'package:movie_memo/src/domain/repositories/search_repository.dart';
 import 'package:movie_memo/src/domain/repositories/serie_repository.dart';
 import 'package:movie_memo/src/domain/usecases/add_unwatched_serie_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/add_watched_serie_use_case.dart';
@@ -15,6 +17,7 @@ import 'package:movie_memo/src/domain/usecases/delete_watched_serie_use_case.dar
 import 'package:movie_memo/src/domain/usecases/get_Watched_series_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/get_popular_movies_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/get_popular_series_use_case.dart';
+import 'package:movie_memo/src/domain/usecases/get_search_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/get_unwatched_series_use_case.dart';
 import 'package:movie_memo/src/domain/usecases/watch_serie_use_case.dart';
 
@@ -34,6 +37,10 @@ Future<void> setupLocator() async {
 
   locator.registerSingleton<MovieRepository>(
     MovieRepositoryImpl(locator<TdmbApiService>()),
+  );
+
+  locator.registerSingleton<SearchRepository>(
+    SearchRepositoryImpl(locator<TdmbApiService>()),
   );
 
   locator.registerSingleton<GetPopularSeriesUseCase>(
@@ -70,5 +77,9 @@ Future<void> setupLocator() async {
 
   locator.registerSingleton<WatchSerieUseCase>(
     WatchSerieUseCase(locator<SerieRepository>()),
+  );
+
+  locator.registerSingleton<GetSearchUseCase>(
+    GetSearchUseCase(locator<SearchRepository>()),
   );
 }
