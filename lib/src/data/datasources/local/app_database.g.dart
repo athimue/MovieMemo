@@ -63,6 +63,8 @@ class _$AppDatabase extends AppDatabase {
 
   SerieDao? _serieDaoInstance;
 
+  MovieDao? _movieDaoInstance;
+
   Future<sqflite.Database> open(
     String path,
     List<Migration> migrations, [
@@ -86,6 +88,8 @@ class _$AppDatabase extends AppDatabase {
       onCreate: (database, version) async {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `series_table` (`id` INTEGER NOT NULL, `isWatched` INTEGER NOT NULL, PRIMARY KEY (`id`))');
+        await database.execute(
+            'CREATE TABLE IF NOT EXISTS `movies_table` (`id` INTEGER NOT NULL, `isWatched` INTEGER NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -96,6 +100,11 @@ class _$AppDatabase extends AppDatabase {
   @override
   SerieDao get serieDao {
     return _serieDaoInstance ??= _$SerieDao(database, changeListener);
+  }
+
+  @override
+  MovieDao get movieDao {
+    return _movieDaoInstance ??= _$MovieDao(database, changeListener);
   }
 }
 
@@ -159,7 +168,7 @@ class _$SerieDao extends SerieDao {
   @override
   Future<void> insertSerie(SerieEntity serieEntity) async {
     await _serieEntityInsertionAdapter.insert(
-        serieEntity, OnConflictStrategy.replace);
+        serieEntity, OnConflictStrategy.abort);
   }
 
   @override
@@ -176,5 +185,85 @@ class _$SerieDao extends SerieDao {
   @override
   Future<void> deleteUnWatchedSerie(SerieEntity serieEntity) async {
     await _serieEntityDeletionAdapter.delete(serieEntity);
+  }
+}
+
+class _$MovieDao extends MovieDao {
+  _$MovieDao(
+    this.database,
+    this.changeListener,
+  )   : _queryAdapter = QueryAdapter(database),
+        _movieEntityInsertionAdapter = InsertionAdapter(
+            database,
+            'movies_table',
+            (MovieEntity item) => <String, Object?>{
+                  'id': item.id,
+                  'isWatched': item.isWatched ? 1 : 0
+                }),
+        _movieEntityUpdateAdapter = UpdateAdapter(
+            database,
+            'movies_table',
+            ['id'],
+            (MovieEntity item) => <String, Object?>{
+                  'id': item.id,
+                  'isWatched': item.isWatched ? 1 : 0
+                }),
+        _movieEntityDeletionAdapter = DeletionAdapter(
+            database,
+            'movies_table',
+            ['id'],
+            (MovieEntity item) => <String, Object?>{
+                  'id': item.id,
+                  'isWatched': item.isWatched ? 1 : 0
+                });
+
+  final sqflite.DatabaseExecutor database;
+
+  final StreamController<String> changeListener;
+
+  final QueryAdapter _queryAdapter;
+
+  final InsertionAdapter<MovieEntity> _movieEntityInsertionAdapter;
+
+  final UpdateAdapter<MovieEntity> _movieEntityUpdateAdapter;
+
+  final DeletionAdapter<MovieEntity> _movieEntityDeletionAdapter;
+
+  @override
+  Future<List<MovieEntity>> getUnwatchedMovies() async {
+    return _queryAdapter.queryList(
+        'SELECT * FROM movies_table WHERE isWatched = \'0\'',
+        mapper: (Map<String, Object?> row) => MovieEntity(
+            id: row['id'] as int, isWatched: (row['isWatched'] as int) != 0));
+  }
+
+  @override
+  Future<List<MovieEntity>> getWatchedMovies() async {
+    return _queryAdapter.queryList(
+        'SELECT * FROM movies_table WHERE isWatched = \'1\'',
+        mapper: (Map<String, Object?> row) => MovieEntity(
+            id: row['id'] as int, isWatched: (row['isWatched'] as int) != 0));
+  }
+
+  @override
+  Future<void> insertMovie(MovieEntity movieEntity) async {
+    await _movieEntityInsertionAdapter.insert(
+        movieEntity, OnConflictStrategy.replace);
+  }
+
+  @override
+  Future<void> watchMovie(MovieEntity movieEntity) async {
+    await _movieEntityUpdateAdapter.update(
+        movieEntity, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<void> deleteWatchedMovie(MovieEntity movieEntity) async {
+    await _movieEntityDeletionAdapter.delete(movieEntity);
+  }
+
+  @override
+  Future<void> deleteUnWatchedMovie(MovieEntity movieEntity) async {
+    await _movieEntityDeletionAdapter.delete(movieEntity);
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_memo/src/presentation/widgets/popular_series.dart';
-import 'package:movie_memo/src/presentation/widgets/unwatched_series.dart';
-import 'package:movie_memo/src/presentation/widgets/watched_series.dart';
+import 'package:movie_memo/src/presentation/widgets/series/popular_series.dart';
+import 'package:movie_memo/src/presentation/widgets/series/unwatched_series.dart';
+import 'package:movie_memo/src/presentation/widgets/series/watched_series.dart';
 
 class Serie extends StatefulWidget {
   const Serie({super.key});

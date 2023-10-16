@@ -24,7 +24,7 @@ class WatchedSeriesWidgetState extends State<WatchedSeries> {
     return BlocBuilder<WatchedSeriesCubit, WatchedSeriesState>(
       builder: (context, state) {
         switch (state.runtimeType) {
-          case WatchedSeriesLoading:
+          case WatchedSeriesInitial:
             return const Center(child: CircularProgressIndicator());
           case WatchedSeriesFailed:
             return const Center(child: Icon(Icons.error));

@@ -105,7 +105,7 @@ class _TdmbApiService implements TdmbApiService {
   }
 
   @override
-  Future<PopularMovieResponseDto> getMovie(
+  Future<MovieDto> getMovie(
     String apiKey,
     String id,
   ) async {
@@ -113,8 +113,8 @@ class _TdmbApiService implements TdmbApiService {
     final queryParameters = <String, dynamic>{r'api_key': apiKey};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<PopularMovieResponseDto>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<MovieDto>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -130,7 +130,7 @@ class _TdmbApiService implements TdmbApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PopularMovieResponseDto.fromJson(_result.data!);
+    final value = MovieDto.fromJson(_result.data!);
     return value;
   }
 

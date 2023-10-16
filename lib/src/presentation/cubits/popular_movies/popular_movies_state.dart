@@ -1,16 +1,16 @@
 part of 'popular_movies_cubit.dart';
 
 abstract class PopularMoviesState extends Equatable {
-  final List<Movie> movies;
+  final List<PopularMovie> popularMovies;
   final Error? error;
 
   const PopularMoviesState({
-    this.movies = const [],
+    this.popularMovies = const [],
     this.error,
   });
 
   @override
-  List<Object?> get props => [movies, error];
+  List<Object?> get props => [popularMovies, error];
 }
 
 class PopularMoviesInitial extends PopularMoviesState {
@@ -22,7 +22,7 @@ class PopularMoviesLoading extends PopularMoviesState {
 }
 
 class PopularMoviesSuccess extends PopularMoviesState {
-  const PopularMoviesSuccess({super.movies});
+  const PopularMoviesSuccess({super.popularMovies});
 }
 
 class PopularMoviesFailed extends PopularMoviesState {

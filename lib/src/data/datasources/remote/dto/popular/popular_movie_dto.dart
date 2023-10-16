@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:movie_memo/src/domain/models/movie.dart';
+import 'package:movie_memo/src/domain/models/popular_movie.dart';
 
 part 'popular_movie_dto.g.dart';
 
@@ -58,7 +58,7 @@ class PopularMovieDto {
 
   Map<String, dynamic> toJson() => _$PopularMovieDtoToJson(this);
 
-  Movie parsePopularMovieDto() => Movie(
+  PopularMovie parsePopularMovieDto() => PopularMovie(
       id: id,
       name: title,
       date: releaseDate,
