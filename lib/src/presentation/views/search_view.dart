@@ -102,7 +102,7 @@ class SearchResultState extends State<SearchResult> {
                                                 state.searchResults[index]
                                                     .mediaType)
                                           },
-                                      child: Icon(Icons.delete))
+                                      child: Icon(Icons.watch_later))
                                 ],
                               )
                             ]));
