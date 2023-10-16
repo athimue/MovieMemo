@@ -60,10 +60,12 @@ class MovieRepositoryImpl implements MovieRepository {
     print("get unwatched movie : $unwatchedMovieEntities");
     var unwatchedMovies = <Movie>[];
     for (MovieEntity movieEntity in unwatchedMovieEntities) {
+      print("coucou");
       unwatchedMovies.add((await tdmbApiService.getMovie(
               "9ee736e148e808222f04c1535dc80b64", movieEntity.id.toString()))
           .parseMovieDto());
     }
+    print("eui");
     return unwatchedMovies;
   }
 

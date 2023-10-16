@@ -35,13 +35,13 @@ class MovieDto {
   @JsonKey(name: "popularity")
   double? popularity;
   @JsonKey(name: "poster_path")
-  String posterPath;
+  String? posterPath;
   @JsonKey(name: "production_companies")
   List<NetworkDto>? productionCompanies;
   @JsonKey(name: "production_countries")
   List<ProductionDto>? productionCountries;
   @JsonKey(name: "release_date")
-  String releaseDate;
+  String? releaseDate;
   @JsonKey(name: "revenue")
   int? revenue;
   @JsonKey(name: "runtime")
@@ -53,7 +53,7 @@ class MovieDto {
   @JsonKey(name: "tagline")
   String? tagline;
   @JsonKey(name: "title")
-  String title;
+  String? title;
   @JsonKey(name: "video")
   bool? video;
   @JsonKey(name: "vote_average")
@@ -95,8 +95,10 @@ class MovieDto {
 
   Movie parseMovieDto() => Movie(
       id: id,
-      title: title,
-      releaseDate: releaseDate,
+      title: title ?? "",
+      releaseDate: releaseDate ?? "",
       note: voteAverage,
-      picturePath: "https://image.tmdb.org/t/p/w92/$posterPath");
+      picturePath: posterPath != null
+          ? "https://image.tmdb.org/t/p/w92/$posterPath"
+          : "");
 }

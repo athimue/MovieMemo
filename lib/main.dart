@@ -79,8 +79,13 @@ class MyApp extends StatelessWidget {
                 watchMovieUseCase: locator<WatchMovieUseCase>()),
           ),
           BlocProvider<SearchCubit>(
-            create: (context) =>
-                SearchCubit(getSearchUseCase: locator<GetSearchUseCase>()),
+            create: (context) => SearchCubit(
+              getSearchUseCase: locator<GetSearchUseCase>(),
+              addUnwatchedMovieUseCase: locator<AddUnwatchedMovieUseCase>(),
+              addUnwatchedSerieUseCase: locator<AddUnwatchedSerieUseCase>(),
+              addWatchedMovieUseCase: locator<AddWatchedMovieUseCase>(),
+              addWatchedSerieUseCase: locator<AddWatchedSerieUseCase>(),
+            ),
           ),
         ],
         child: MaterialApp(

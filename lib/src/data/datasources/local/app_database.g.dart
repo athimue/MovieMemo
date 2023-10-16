@@ -168,7 +168,7 @@ class _$SerieDao extends SerieDao {
   @override
   Future<void> insertSerie(SerieEntity serieEntity) async {
     await _serieEntityInsertionAdapter.insert(
-        serieEntity, OnConflictStrategy.abort);
+        serieEntity, OnConflictStrategy.replace);
   }
 
   @override

@@ -84,7 +84,27 @@ class SearchResultState extends State<SearchResult> {
                                   state.searchResults[index].mediaType,
                                   style: TextStyle(color: Colors.blue),
                                 ),
-                              ]))
+                              ])),
+                              Column(
+                                children: [
+                                  ElevatedButton(
+                                      onPressed: () => {
+                                            searchCubit.watch(
+                                                state.searchResults[index].id,
+                                                state.searchResults[index]
+                                                    .mediaType)
+                                          },
+                                      child: Icon(Icons.done)),
+                                  ElevatedButton(
+                                      onPressed: () => {
+                                            searchCubit.unwatch(
+                                                state.searchResults[index].id,
+                                                state.searchResults[index]
+                                                    .mediaType)
+                                          },
+                                      child: Icon(Icons.delete))
+                                ],
+                              )
                             ]));
                       });
             default:

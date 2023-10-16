@@ -24,14 +24,14 @@ MovieDto _$MovieDtoFromJson(Map<String, dynamic> json) => MovieDto(
       originalTitle: json['original_title'] as String?,
       overview: json['overview'] as String?,
       popularity: (json['popularity'] as num?)?.toDouble(),
-      posterPath: json['poster_path'] as String,
+      posterPath: json['poster_path'] as String?,
       productionCompanies: (json['production_companies'] as List<dynamic>?)
           ?.map((e) => NetworkDto.fromJson(e as Map<String, dynamic>))
           .toList(),
       productionCountries: (json['production_countries'] as List<dynamic>?)
           ?.map((e) => ProductionDto.fromJson(e as Map<String, dynamic>))
           .toList(),
-      releaseDate: json['release_date'] as String,
+      releaseDate: json['release_date'] as String?,
       revenue: json['revenue'] as int?,
       runtime: json['runtime'] as int?,
       spokenLanguages: (json['spoken_languages'] as List<dynamic>?)
@@ -39,7 +39,7 @@ MovieDto _$MovieDtoFromJson(Map<String, dynamic> json) => MovieDto(
           .toList(),
       status: json['status'] as String?,
       tagline: json['tagline'] as String?,
-      title: json['title'] as String,
+      title: json['title'] as String?,
       video: json['video'] as bool?,
       voteAverage: (json['vote_average'] as num).toDouble(),
       voteCount: json['vote_count'] as int?,

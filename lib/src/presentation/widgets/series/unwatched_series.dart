@@ -38,10 +38,12 @@ class UnwatchedSeriesWidgetState extends State<UnwatchedSeries> {
                         Padding(
                             padding: EdgeInsets.all(10),
                             child: Row(children: [
-                              ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.network(state
-                                      .unwatchedSeries[index].picturePath)),
+                              state.unwatchedSeries[index].picturePath != ""
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.network(state
+                                          .unwatchedSeries[index].picturePath))
+                                  : Text("No image"),
                               Expanded(
                                   child: Padding(
                                       padding: EdgeInsets.all(10),
