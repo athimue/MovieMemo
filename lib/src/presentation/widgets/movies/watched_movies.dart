@@ -57,7 +57,7 @@ class WatchedMoviesWidgetState extends State<WatchedMovies> {
                                             color: Colors.green),
                                       ),
                                       Text(
-                                        "Platform : ${state.watchMovies[index].releaseDate}",
+                                        "Release date : ${state.watchMovies[index].releaseDate}",
                                         style: TextStyle(color: Colors.green),
                                       ),
                                       Text(

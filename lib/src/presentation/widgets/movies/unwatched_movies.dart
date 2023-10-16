@@ -57,7 +57,7 @@ class UnwatchedMoviesWidgetState extends State<UnwatchedMovies> {
                                               color: Colors.green),
                                         ),
                                         Text(
-                                          "Platform : ${state.unwatchedMovies[index].releaseDate}",
+                                          "Release date : ${state.unwatchedMovies[index].releaseDate}",
                                           style: TextStyle(color: Colors.green),
                                         ),
                                         Text(
