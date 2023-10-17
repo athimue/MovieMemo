@@ -31,9 +31,7 @@ class SerieRepositoryImpl implements SerieRepository {
   @override
   Future<List<Serie>> getWatchedSeries() async {
     final watchedSerieEntities = await serieDao.getWatchedSeries();
-    print("get watched series : $watchedSerieEntities");
     var watchedSeries = <Serie>[];
-    print(watchedSerieEntities);
     for (SerieEntity serieEntity in watchedSerieEntities) {
       watchedSeries.add((await tdmbApiService.getSerie(
               "9ee736e148e808222f04c1535dc80b64", serieEntity.id.toString()))
@@ -45,9 +43,7 @@ class SerieRepositoryImpl implements SerieRepository {
   @override
   Future<List<Serie>> getUnwatchedSeries() async {
     final unwatchedSerieEntities = await serieDao.getUnwatchedSeries();
-    print("get unwatched series : $unwatchedSerieEntities");
     var unwatchedSeries = <Serie>[];
-    print(unwatchedSerieEntities);
     for (SerieEntity serieEntity in unwatchedSerieEntities) {
       unwatchedSeries.add((await tdmbApiService.getSerie(
               "9ee736e148e808222f04c1535dc80b64", serieEntity.id.toString()))
@@ -58,13 +54,11 @@ class SerieRepositoryImpl implements SerieRepository {
 
   @override
   Future<void> addUnwatchedSeriee(int serieId) {
-    print("add unwatched series : $serieId");
     return serieDao.insertSerie(SerieEntity(id: serieId, isWatched: false));
   }
 
   @override
   Future<void> addWatchedSerie(int serieId) {
-    print("add watched series : $serieId");
     return serieDao.insertSerie(SerieEntity(id: serieId, isWatched: true));
   }
 

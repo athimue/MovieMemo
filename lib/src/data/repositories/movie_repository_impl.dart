@@ -32,13 +32,11 @@ class MovieRepositoryImpl implements MovieRepository {
 
   @override
   Future<void> addUnwatchedMovie(int movieId) {
-    print("add unwatched movie : $movieId");
     return movieDao.insertMovie(MovieEntity(id: movieId, isWatched: false));
   }
 
   @override
   Future<void> addWatchedMovie(int movieId) {
-    print("add watched movie : $movieId");
     return movieDao.insertMovie(MovieEntity(id: movieId, isWatched: true));
   }
 
@@ -57,22 +55,18 @@ class MovieRepositoryImpl implements MovieRepository {
   @override
   Future<List<Movie>> getUnwatchedMovies() async {
     final unwatchedMovieEntities = await movieDao.getUnwatchedMovies();
-    print("get unwatched movie : $unwatchedMovieEntities");
     var unwatchedMovies = <Movie>[];
     for (MovieEntity movieEntity in unwatchedMovieEntities) {
-      print("coucou");
       unwatchedMovies.add((await tdmbApiService.getMovie(
               "9ee736e148e808222f04c1535dc80b64", movieEntity.id.toString()))
           .parseMovieDto());
     }
-    print("eui");
     return unwatchedMovies;
   }
 
   @override
   Future<List<Movie>> getWatchedMovies() async {
     final watchedMovieEntities = await movieDao.getWatchedMovies();
-    print("get watched movie : $watchedMovieEntities");
     var watchedMovies = <Movie>[];
     for (MovieEntity movieEntity in watchedMovieEntities) {
       watchedMovies.add((await tdmbApiService.getMovie(

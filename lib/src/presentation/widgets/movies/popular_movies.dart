@@ -25,9 +25,9 @@ class PopularMoviesWidgetState extends State<PopularMovies> {
       builder: (context, state) {
         switch (state.runtimeType) {
           case PopularMoviesLoading:
-            return const Center(child: Icon(Icons.baby_changing_station_sharp));
+            return const Center(child: CircularProgressIndicator());
           case PopularMoviesFailed:
-            return const Center(child: Icon(Icons.refresh));
+            return const Center(child: Icon(Icons.error));
           case PopularMoviesSuccess:
             return state.popularMovies.isEmpty
                 ? Center(child: Text("No popular movies."))
@@ -65,8 +65,7 @@ class PopularMoviesWidgetState extends State<PopularMovies> {
                                           style:
                                               TextStyle(color: Colors.green)),
                                       Text(
-                                          state.popularMovies[index].popularity
-                                              .toString(),
+                                          "Note : ${state.popularMovies[index].voteAverage.toString()} / 10",
                                           style:
                                               TextStyle(color: Colors.green)),
                                     ]))),

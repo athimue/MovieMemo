@@ -80,5 +80,5 @@ class SearchResultDto {
       picturePath: posterPath != null
           ? "https://image.tmdb.org/t/p/w92/$posterPath"
           : "",
-      mediaType: mediaType);
+      mediaType: mediaType == "tv" ? "serie" : mediaType);
 }

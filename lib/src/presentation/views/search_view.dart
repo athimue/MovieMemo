@@ -41,8 +41,7 @@ class SearchResultState extends State<SearchResult> {
             child: (() {
           switch (state.runtimeType) {
             case SearchLoading:
-              return const Center(
-                  child: Icon(Icons.baby_changing_station_sharp));
+              return const Center(child: CircularProgressIndicator());
             case SearchFailed:
               return const Center(child: Icon(Icons.refresh));
             case SearchSuccess:
@@ -81,7 +80,8 @@ class SearchResultState extends State<SearchResult> {
                                   style: TextStyle(color: Colors.blue),
                                 ),
                                 Text(
-                                  state.searchResults[index].mediaType,
+                                  state.searchResults[index].mediaType
+                                      .toUpperCase(),
                                   style: TextStyle(color: Colors.blue),
                                 ),
                               ])),

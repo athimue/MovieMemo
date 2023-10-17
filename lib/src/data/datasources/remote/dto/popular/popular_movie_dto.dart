@@ -63,7 +63,7 @@ class PopularMovieDto {
       name: title,
       date: releaseDate,
       originalLanguage: originalLanguage,
-      popularity: popularity,
+      voteAverage: voteAverage,
       overview: overview,
       picturePath: "https://image.tmdb.org/t/p/w92/$posterPath");
 }
