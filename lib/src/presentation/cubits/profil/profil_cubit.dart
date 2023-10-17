@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_memo/src/domain/models/movie.dart';
 import 'package:movie_memo/src/domain/models/serie.dart';
 import 'package:movie_memo/src/domain/usecases/get_unwatched_movies_use_case.dart';
