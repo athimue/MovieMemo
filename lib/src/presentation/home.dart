@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
                   Icons.man,
                   color: Colors.orange,
                 ),
-                label: "Search")
+                label: "Statistics")
           ],
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,

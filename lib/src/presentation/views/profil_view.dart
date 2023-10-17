@@ -5,10 +5,11 @@ class Profil extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (Center(
-        child: Icon(
-      Icons.man,
-      size: 150,
-    )));
+    return (Column(children: [
+      Icon(
+        Icons.man,
+        size: 150,
+      )
+    ]));
   }
 }

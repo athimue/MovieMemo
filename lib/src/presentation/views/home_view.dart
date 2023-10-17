@@ -21,6 +21,12 @@ class _HomeState extends State<Home> {
   }
 
   final _pages = <Widget>[Serie(), Movie(), SearchResult(), Profil()];
+  final _colors = <MaterialColor>[
+    Colors.pink,
+    Colors.green,
+    Colors.blue,
+    Colors.orange
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +63,14 @@ class _HomeState extends State<Home> {
                 label: "Search"),
             BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.man,
+                  Icons.auto_graph,
                   color: Colors.orange,
                 ),
-                label: "Search")
+                label: "Statistics")
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.purple[800],
+          selectedItemColor: _colors[_selectedIndex],
+          unselectedItemColor: Colors.purple[300],
           onTap: _onItemTapped,
         ),
         body: _pages.elementAt(_selectedIndex));
