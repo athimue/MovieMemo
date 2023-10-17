@@ -66,7 +66,7 @@ class _HomeState extends State<Home> {
                   Icons.auto_graph,
                   color: Colors.orange,
                 ),
-                label: "Statistics")
+                label: "Profil")
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: _colors[_selectedIndex],

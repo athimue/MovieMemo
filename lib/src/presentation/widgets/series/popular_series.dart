@@ -100,7 +100,7 @@ class PopularSeriesWidgetState extends State<PopularSeries> {
                             }))
                   ]);
           default:
-            return const Center(child: Icon(Icons.access_alarm));
+            return const Center(child: CircularProgressIndicator());
         }
       },
     );

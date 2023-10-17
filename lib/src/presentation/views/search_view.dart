@@ -108,8 +108,7 @@ class SearchResultState extends State<SearchResult> {
                             ]));
                       });
             default:
-              return const Center(
-                  child: Icon(Icons.baby_changing_station_sharp));
+              return const Center(child: CircularProgressIndicator());
           }
         }()))
       ]);

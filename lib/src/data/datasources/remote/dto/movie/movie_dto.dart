@@ -98,6 +98,7 @@ class MovieDto {
       title: title ?? "",
       releaseDate: releaseDate ?? "",
       note: voteAverage,
+      runtime: runtime ?? 0,
       picturePath: posterPath != null
           ? "https://image.tmdb.org/t/p/w92/$posterPath"
           : "");

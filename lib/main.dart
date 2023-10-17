@@ -20,6 +20,7 @@ import 'package:movie_memo/src/domain/usecases/watch_serie_use_case.dart';
 import 'package:movie_memo/src/locator.dart';
 import 'package:movie_memo/src/presentation/cubits/popular_movies/popular_movies_cubit.dart';
 import 'package:movie_memo/src/presentation/cubits/popular_series/popular_series_cubit.dart';
+import 'package:movie_memo/src/presentation/cubits/profil/profil_cubit.dart';
 import 'package:movie_memo/src/presentation/cubits/search/search_cubit.dart';
 import 'package:movie_memo/src/presentation/cubits/unwatched_movies/unwatched_movies_cubit.dart';
 import 'package:movie_memo/src/presentation/cubits/unwatched_series/unwatched_series_cubit.dart';
@@ -85,6 +86,14 @@ class MyApp extends StatelessWidget {
               addUnwatchedSerieUseCase: locator<AddUnwatchedSerieUseCase>(),
               addWatchedMovieUseCase: locator<AddWatchedMovieUseCase>(),
               addWatchedSerieUseCase: locator<AddWatchedSerieUseCase>(),
+            ),
+          ),
+          BlocProvider<ProfilCubit>(
+            create: (context) => ProfilCubit(
+              getUnwatchedMoviesUseCase: locator<GetUnwatchedMoviesUseCase>(),
+              getUnwatchedSeriesUseCase: locator<GetUnwatchedSeriesUseCase>(),
+              getWatchedMoviesUseCase: locator<GetWatchedMoviesUseCase>(),
+              getWatchedSeriesUseCase: locator<GetWatchedSeriesUseCase>(),
             ),
           ),
         ],
